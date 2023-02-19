@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Document</title>
+
+    <link rel="stylesheet" href="main.css">
+  </head>
+
+  <body>
+    <center>
+      <form onsubmit="saveToLocalStorage(event)">
+        <h3 style="text-align: center; color: orange">Book a Call</h3>
+        <marquee width="100%" direction="left" height="20px">
+          Book a call slot and our representative will call you within 1hr of
+          selected time
+        </marquee>
+
+        <hr width="100%" size="1px" />
+
+        <label>Name</label><br />
+
+        <input
+          id="inputtag"
+          type="text"
+          name="name"
+          placeholder="buddy"
+          required
+        /><br />
+
+        <label>Email</label><br />
+
+        <input
+          id="emailtag"
+          type="email"
+          name="email"
+          placeholder="abc@gmial,com"
+          required
+        /><br />
+
+        <label>Phone</label><br />
+
+        <input
+          id="phonetag"
+          type="text"
+          name="phone"
+          placeholder="1335554444"
+          required
+        /><br />
+
+        <button>Get a call</button>
+      </form>
+      <ul id="listofuser"></ul>
+    </center>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js"></script>
+
+    <script src="main.js"></script>
+  </body>
+</html>
