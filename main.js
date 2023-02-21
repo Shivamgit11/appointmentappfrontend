@@ -16,10 +16,11 @@ function saveToLocalStorage(event) {
   axios
     .post("http://localhost:3000/user/adduser", obj)
     .then((response) => {
-      shownewUserOnScreen(response.data);
-      console.log(response);
+      shownewUserOnScreen(response.data.newUserDetail);
+      console.log(response,"inside frontend post");
     })
     .catch((err) => {
+      alert("either your phone number or email is already registere with us");
       console.log(err);
     });
   // localStorage.setItem(obj.email, JSON.stringify(obj));
@@ -28,11 +29,11 @@ function saveToLocalStorage(event) {
 
 window.addEventListener("DOMContentLoaded", () => {
   axios
-    .get("http://localhost:3000/user/adduser")
+    .get("http://localhost:3000/user/getusers")
     .then((response) => {
-      console.log(response);
-      for (var i = 0; i < response.data.length; i++) {
-        shownewUserOnScreen(response.data[i]);
+      console.log(response,"get");
+      for (var i = 0; i < response.data.allUsers.length; i++) {
+        shownewUserOnScreen(response.data.allUsers[i]);
       }
     })
     .catch((error) => {
@@ -43,13 +44,13 @@ window.addEventListener("DOMContentLoaded", () => {
 function shownewUserOnScreen(user) {
   const parentElem = document.getElementById("listofuser");
   const childElem = document.createElement("li");
-  childElem.textContent = user.name + " , " + user.email + " , " + user.phone;
+  childElem.textContent = user.name + " , " + user.email + " , " + user.phonenumber;
   const deleteBtn = document.createElement("input");
   deleteBtn.type = "Button";
   deleteBtn.value = "Delete";
   deleteBtn.onclick = () => {
     axios
-      .delete(`http://localhost:3000/user/adduser/${user._id}`)
+      .delete(`http://localhost:3000/user/deleteuser/${user.id}`)
       .then((response) => {
         // removeUserFromScreen(userId);
         console.log(response);
@@ -66,7 +67,7 @@ function shownewUserOnScreen(user) {
   editBtn.value = "Edit";
   editBtn.onclick = () => {
     axios
-      .delete(`http://localhost:3000/user/adduser/${user._id}`)
+      .delete(`http://localhost:3000/user/deleteuser/${user.id}`)
       .then((response) => {
         // removeUserFromScreen(userId);
         console.log(response);
